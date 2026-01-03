@@ -6,18 +6,16 @@
   <title>Nouveau Mobilité - Kontakt</title>
   <style>
     :root {
-      --c-primary: #2d6a4f;
-      --c-secondary: #40916c;
-      --c-accent: #d4a373;
-      --c-bg: #fefae0;
-      --c-text: #283618;
-      --c-white: #ffffff;
-      --f-head: 'Poppins', sans-serif;
-      --f-body: 'Open Sans', sans-serif;
+      --col-primary: #2d6a4f;
+      --col-secondary: #40916c;
+      --col-accent: #d4a373;
+      --col-bg: #fefae0;
+      --col-text: #283618;
+      --font-heading: 'Poppins', sans-serif;
+      --font-body: 'Open Sans', sans-serif;
       --radius: 16px;
       --shadow-hover: 0 10px 30px rgba(45, 106, 79, 0.2);
-      --shadow-glow: 0 0 20px rgba(45, 106, 79, 0.4);
-      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      --nav-height: 80px;
     }
 
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Open+Sans:wght@300;400;600&display=swap');
@@ -28,504 +26,480 @@
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      background-color: var(--c-bg);
-      color: var(--c-text);
-      font-family: var(--f-body);
+      font-family: var(--font-body);
+      background-color: var(--col-bg);
+      color: var(--col-text);
       line-height: 1.6;
       overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
     }
 
     h1, h2, h3, h4, h5, h6 {
-      font-family: var(--f-head);
+      font-family: var(--font-heading);
       font-weight: 600;
       line-height: 1.2;
-      margin-bottom: 1rem;
     }
 
     a {
       text-decoration: none;
       color: inherit;
-      transition: var(--transition);
+      transition: all 0.3s ease;
     }
 
     .btn-primary {
       display: inline-block;
-      background: linear-gradient(135deg, var(--c-primary), var(--c-secondary));
-      color: var(--c-white);
       padding: 14px 32px;
-      border-radius: 50px;
-      font-family: var(--f-head);
+      background: linear-gradient(135deg, var(--col-primary), var(--col-secondary));
+      color: #fff;
+      font-family: var(--font-heading);
       font-weight: 600;
+      border-radius: var(--radius);
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       text-transform: uppercase;
       letter-spacing: 1px;
       font-size: 0.9rem;
-      border: none;
-      cursor: pointer;
-      transition: var(--transition);
-      position: relative;
-      overflow: hidden;
     }
 
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: var(--shadow-glow);
+      box-shadow: 0 0 20px rgba(45, 106, 79, 0.4);
     }
 
-    @keyframes gradient-bg {
+    @keyframes gradientMove {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
 
     @keyframes float {
-      0% { transform: translate(0, 0); }
-      50% { transform: translate(0, -20px); }
-      100% { transform: translate(0, 0); }
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0px); }
     }
 
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes slideInRight {
-      from { transform: translateX(100%); }
-      to { transform: translateX(0); }
+    @keyframes glowText {
+      0% { text-shadow: 0 0 5px rgba(255,255,255,0.1); }
+      50% { text-shadow: 0 0 20px rgba(255,255,255,0.4); }
+      100% { text-shadow: 0 0 5px rgba(255,255,255,0.1); }
     }
 
-    @keyframes textGlow {
-      0% { text-shadow: 0 0 10px rgba(212, 163, 115, 0.2); }
-      50% { text-shadow: 0 0 20px rgba(212, 163, 115, 0.6); }
-      100% { text-shadow: 0 0 10px rgba(212, 163, 115, 0.2); }
-    }
-
+    /* Navigation Styles */
     .nm-nav {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      z-index: 1000;
-      padding: 20px 0;
-      background: rgba(254, 250, 224, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(40, 54, 24, 0.05);
-    }
-
-    .nm-nav-container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 5%;
+      height: var(--nav-height);
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 0 5%;
+      background: rgba(254, 250, 224, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      border-bottom: 1px solid rgba(40, 54, 24, 0.05);
     }
 
     .nm-logo {
-      font-family: var(--f-head);
+      font-family: var(--font-heading);
       font-size: 1.5rem;
       font-weight: 700;
-      color: var(--c-primary);
+      color: var(--col-primary);
       letter-spacing: -0.5px;
     }
 
-    .nm-logo .accent {
-      color: var(--c-accent);
+    .nm-logo span {
+      color: var(--col-accent);
     }
 
-    .nm-links {
-      display: flex;
-      align-items: center;
-      gap: 40px;
+    .nm-desktop-links {
+      display: none;
     }
 
-    .nav-link {
-      font-family: var(--f-head);
-      font-weight: 400;
-      font-size: 0.95rem;
-      color: var(--c-text);
+    /* Hamburger Checkbox Hack */
+    .nav-toggle-checkbox {
+      display: none;
+    }
+
+    .hamburger {
+      width: 30px;
+      height: 24px;
       position: relative;
-    }
-
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: var(--c-accent);
-      transition: width 0.3s ease;
-    }
-
-    .nav-link:hover {
-      color: var(--c-primary);
-    }
-
-    .nav-link:hover::after {
-      width: 100%;
-    }
-
-    .nav-toggle {
-      display: none;
-    }
-
-    .nav-burger {
-      display: none;
-      flex-direction: column;
-      gap: 6px;
       cursor: pointer;
       z-index: 1002;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
-    .nav-burger span {
+    .hamburger span {
       display: block;
-      width: 25px;
+      width: 100%;
       height: 2px;
-      background: var(--c-primary);
+      background: var(--col-primary);
+      border-radius: 2px;
       transition: all 0.3s ease;
     }
 
-    @media (max-width: 992px) {
-      .nav-burger {
-        display: flex;
-      }
-
-      .nm-links {
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 80%;
-        max-width: 400px;
-        height: 100vh;
-        background: rgba(254, 250, 224, 0.98);
-        backdrop-filter: blur(20px);
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        transform: translateX(100%);
-        transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-        box-shadow: -10px 0 30px rgba(0,0,0,0.05);
-      }
-
-      .nav-toggle:checked ~ .nm-links {
-        transform: translateX(0);
-      }
-
-      .nav-toggle:checked ~ .nav-burger span:nth-child(1) {
-        transform: rotate(45deg) translate(5px, 6px);
-      }
-      .nav-toggle:checked ~ .nav-burger span:nth-child(2) {
-        opacity: 0;
-      }
-      .nav-toggle:checked ~ .nav-burger span:nth-child(3) {
-        transform: rotate(-45deg) translate(5px, -6px);
-      }
+    /* Hamburger Animation */
+    .nav-toggle-checkbox:checked ~ .hamburger span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 10px);
+    }
+    .nav-toggle-checkbox:checked ~ .hamburger span:nth-child(2) {
+      opacity: 0;
+    }
+    .nav-toggle-checkbox:checked ~ .hamburger span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -11px);
     }
 
-    .nm-footer {
-      background: linear-gradient(180deg, #1b4332 0%, #000000 100%);
-      color: var(--c-white);
-      padding: 80px 0 30px;
-      margin-top: 100px;
-    }
-
-    .footer-content {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 5%;
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 60px;
-    }
-
-    .footer-col h3 {
-      font-size: 1.8rem;
-      margin-bottom: 20px;
-    }
-
-    .footer-col .accent {
-      color: var(--c-accent);
-    }
-
-    .footer-col p {
-      opacity: 0.8;
-      max-width: 300px;
-      font-size: 0.9rem;
-    }
-
-    .footer-col h4 {
-      color: var(--c-accent);
-      font-size: 1.1rem;
-      margin-bottom: 25px;
-    }
-
-    .footer-col a {
-      display: block;
-      color: rgba(255,255,255,0.7);
-      margin-bottom: 12px;
-      font-size: 0.95rem;
-      transition: all 0.3s ease;
-    }
-
-    .footer-col a:hover {
-      color: var(--c-white);
-      transform: translateX(5px);
-    }
-
-    .social-icons {
+    /* Mobile Menu Overlay */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(254, 250, 224, 0.95);
+      backdrop-filter: blur(15px);
       display: flex;
-      gap: 15px;
-    }
-
-    .social-icons a {
-      display: flex;
-      align-items: center;
+      flex-direction: column;
       justify-content: center;
-      width: 40px;
-      height: 40px;
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 50%;
+      align-items: center;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+      z-index: 1001;
     }
 
-    .social-icons a:hover {
-      border-color: var(--c-accent);
-      background: var(--c-accent);
-      color: var(--c-text);
-      transform: translateY(-3px);
+    .nav-toggle-checkbox:checked ~ .mobile-menu {
+      transform: translateX(0);
     }
 
+    .mobile-link {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--col-text);
+      margin: 1.5rem 0;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+    }
+
+    .nav-toggle-checkbox:checked ~ .mobile-menu .mobile-link {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.2s;
+    }
+
+    .nav-toggle-checkbox:checked ~ .mobile-menu .mobile-link:nth-child(2) { transition-delay: 0.3s; }
+    .nav-toggle-checkbox:checked ~ .mobile-menu .mobile-link:nth-child(3) { transition-delay: 0.4s; }
+    .nav-toggle-checkbox:checked ~ .mobile-menu .mobile-link:nth-child(4) { transition-delay: 0.5s; }
+
+    @media (min-width: 992px) {
+      .hamburger { display: none; }
+      .mobile-menu { display: none; }
+      .nm-desktop-links {
+        display: flex;
+        align-items: center;
+        gap: 3rem;
+      }
+      .nav-link {
+        font-family: var(--font-heading);
+        font-weight: 400;
+        font-size: 0.95rem;
+        color: var(--col-text);
+        position: relative;
+      }
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 1px;
+        bottom: -4px;
+        left: 0;
+        background-color: var(--col-accent);
+        transition: width 0.3s ease;
+      }
+      .nav-link:hover {
+        color: var(--col-primary);
+      }
+      .nav-link:hover::after {
+        width: 100%;
+      }
+    }
+
+    /* Footer Styles */
+    .nm-footer {
+      background: linear-gradient(180deg, var(--col-primary) 0%, #1b4332 100%);
+      color: #fff;
+      padding: 4rem 5% 2rem;
+      margin-top: 4rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .footer-brand h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--col-bg);
+    }
+    .footer-col h4 {
+      color: var(--col-accent);
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .footer-links {
+      list-style: none;
+    }
+    .footer-links li {
+      margin-bottom: 0.8rem;
+    }
+    .footer-links a {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+    .footer-links a:hover {
+      color: var(--col-accent);
+      padding-left: 5px;
+    }
     .footer-bottom {
-      max-width: 1400px;
-      margin: 60px auto 0;
-      padding: 30px 5% 0;
+      margin-top: 3rem;
+      padding-top: 2rem;
       border-top: 1px solid rgba(255,255,255,0.1);
       text-align: center;
-      font-size: 0.85rem;
-      opacity: 0.5;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.5);
     }
-
-    @media (max-width: 768px) {
-      .footer-content {
-        grid-template-columns: 1fr;
-        gap: 40px;
+    @media(min-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 1.5fr 1fr 1fr 1fr;
       }
     }
 
+    /* Section Wrapper Styles */
     .nm-section {
-      padding: 120px 5%;
+      padding: 6rem 5%;
       max-width: 1400px;
       margin: 0 auto;
     }
-
+    
     .section-header {
       text-align: center;
-      margin-bottom: 80px;
+      margin-bottom: 4rem;
       max-width: 700px;
       margin-left: auto;
       margin-right: auto;
     }
 
+    .section-subtitle {
+      display: block;
+      color: var(--col-accent);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+
     .section-title {
       font-size: 2.5rem;
-      color: var(--c-primary);
-      margin-bottom: 20px;
+      color: var(--col-text);
+      margin-bottom: 1rem;
     }
 
-    .section-line {
-      width: 60px;
-      height: 3px;
-      background: var(--c-accent);
-      margin: 0 auto 20px;
-    }
-
-    .section-subtitle {
-      font-size: 1.1rem;
-      color: var(--c-text);
-      opacity: 0.7;
-    }
-
-    .section-content {
+    .section-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 40px;
+      grid-template-columns: 1fr;
+      gap: 2rem;
     }
 
-    .nm-form {
-      background: #ffffff;
-      padding: 50px;
+    @media (min-width: 768px) {
+      .section-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* Kontakt Form Styles */
+    .nm-form-container {
+      background: #fff;
+      padding: 3rem;
       border-radius: var(--radius);
-      box-shadow: 0 20px 60px rgba(45, 106, 79, 0.05);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.05);
       max-width: 600px;
       margin: 0 auto;
     }
-
+    
     .form-group {
-      position: relative;
-      margin-bottom: 30px;
+      margin-bottom: 1.5rem;
     }
 
-    .form-group input,
-    .form-group textarea,
-    .form-group select {
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--col-text);
+    }
+
+    .form-input,
+    .form-textarea {
       width: 100%;
-      padding: 15px 0;
-      border: none;
-      border-bottom: 1px solid rgba(40, 54, 24, 0.2);
-      background: transparent;
-      font-family: var(--f-body);
+      padding: 1rem;
+      border: 1px solid #e0e0e0;
+      border-radius: var(--radius);
+      font-family: var(--font-body);
       font-size: 1rem;
-      color: var(--c-text);
+      transition: border-color 0.3s, box-shadow 0.3s;
+      background: #fafafa;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus {
       outline: none;
-      transition: border-color 0.3s ease;
+      border-color: var(--col-secondary);
+      box-shadow: 0 0 0 4px rgba(64, 145, 108, 0.1);
+      background: #fff;
     }
 
-    .form-group label {
-      position: absolute;
-      top: 15px;
-      left: 0;
-      font-size: 1rem;
-      color: rgba(40, 54, 24, 0.5);
-      pointer-events: none;
-      transition: all 0.3s ease;
+    .form-textarea {
+      resize: vertical;
+      min-height: 120px;
     }
 
-    .form-group input:focus,
-    .form-group textarea:focus {
-      border-bottom-color: var(--c-accent);
-    }
-
-    .form-group input:focus + label,
-    .form-group input:not(:placeholder-shown) + label,
-    .form-group textarea:focus + label,
-    .form-group textarea:not(:placeholder-shown) + label {
-      top: -10px;
-      font-size: 0.8rem;
-      color: var(--c-accent);
-    }
-
-    .form-group select {
-      color: var(--c-text);
-      padding-left: 0;
-    }
-
-    button[type="submit"] {
+    .form-submit {
       width: 100%;
-      margin-top: 10px;
+      margin-top: 1rem;
     }
   </style>
 </head>
 <body>
   <!-- NAVIGATION (PFLICHT - von unten kopieren) -->
-  <header class="nm-nav">
-    <div class="nm-nav-container">
-      <a href="index.html" class="nm-logo">
-        Nouveau<span class="accent">Mobilité</span>
-      </a>
-      
-      <input type="checkbox" id="nav-toggle" class="nav-toggle">
-      <label for="nav-toggle" class="nav-burger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </label>
-
-      <nav class="nm-links">
-        <a href="index.html" class="nav-link">Accueil</a>
-        <a href="ueber-uns.html" class="nav-link">À propos</a>
-        <a href="leistungen.html" class="nav-link">Services</a>
-        <a href="kontakt.html" class="nav-link">Contact</a>
-        <a href="impressum.html" class="nav-link">Mentions légales</a>
-      </nav>
+  <nav class="nm-nav">
+    <a href="index.html" class="nm-logo">Nouveau <span>Mobilité</span></a>
+    
+    <!-- Desktop Nav -->
+    <div class="nm-desktop-links">
+      <a href="index.html" class="nav-link">Accueil</a>
+      <a href="leistungen.html" class="nav-link">Véhicules</a>
+      <a href="ueber-uns.html" class="nav-link">L'Agence</a>
+      <a href="kontakt.html" class="btn-primary">Réserver</a>
     </div>
-  </header>
+
+    <!-- Mobile Toggle -->
+    <input type="checkbox" id="nav-toggle" class="nav-toggle-checkbox">
+    <label for="nav-toggle" class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+      <a href="index.html" class="mobile-link">Accueil</a>
+      <a href="leistungen.html" class="mobile-link">Véhicules</a>
+      <a href="ueber-uns.html" class="mobile-link">L'Agence</a>
+      <a href="kontakt.html" class="mobile-link" style="color: var(--col-primary); font-weight: 600;">Réserver</a>
+    </div>
+  </nav>
   
   <!-- MAIN CONTENT -->
   <section class="nm-section">
     <div class="section-header">
-      <h2 class="section-title">Contact</h2>
-      <div class="section-line"></div>
-      <p class="section-subtitle">Nous sommes là pour vous aider. Contactez-nous pour toute question ou demande.</p>
+      <span class="section-subtitle">Contact</span>
+      <h2 class="section-title">Contactez-nous</h2>
+      <p>Nous sommes là pour vous aider. Remplissez le formulaire ci-dessous ou contactez-nous directement via nos coordonnées.</p>
     </div>
-    <div class="section-content">
+    
+    <div class="section-grid">
       <div>
-        <form class="nm-form">
-          <div class="form-group">
-            <input type="text" id="name" required placeholder=" ">
-            <label for="name">Votre Nom</label>
-          </div>
-          <div class="form-group">
-            <input type="email" id="email" required placeholder=" ">
-            <label for="email">Adresse Email</label>
-          </div>
-          <div class="form-group">
-            <select id="subject">
-              <option value="" disabled selected>Sujet de la demande</option>
-              <option value="reservation">Réservation</option>
-              <option value="support">Service Client</option>
-              <option value="b2b">Partenariat Entreprise</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <textarea id="message" rows="4" required placeholder=" "></textarea>
-            <label for="message">Votre Message</label>
-          </div>
-          <button type="submit" class="btn-primary">Envoyer la demande</button>
-        </form>
+        <div class="nm-form-container">
+          <form action="#" method="POST">
+            <div class="form-group">
+              <label class="form-label">Nom complet</label>
+              <input type="text" class="form-input" placeholder="Votre nom" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-input" placeholder="votre@email.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Date de location souhaitée</label>
+              <input type="date" class="form-input">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Message</label>
+              <textarea class="form-textarea" placeholder="Je suis intéressé par le modèle..." required></textarea>
+            </div>
+            <button type="submit" class="btn-primary form-submit">Envoyer la demande</button>
+          </form>
+        </div>
       </div>
       <div>
-        <h3>Contactez-nous</h3>
-        <p>Adresse: 122 Rue Amelot, 75011 Paris</p>
-        <p>Email: <a href="mailto:contact@nouveaumobilite.fr">contact@nouveaumobilite.fr</a></p>
-        <p>Téléphone: <a href="tel:+33123456789">+33 1 23 45 67 89</a></p>
+        <h3>Nos coordonnées</h3>
+        <p>Adresse : 122 Rue Amelot, 75011 Paris</p>
+        <p>Email : <a href="mailto:info@nouveaumobilite.fr">info@nouveaumobilite.fr</a></p>
+        <p>Téléphone : <a href="tel:+33123456789">+33 1 23 45 67 89</a></p>
+        <p>Pour nous rejoindre : Prenez le métro jusqu'à la station Oberkampf, puis marchez 5 minutes jusqu'à notre agence.</p>
       </div>
     </div>
   </section>
   
   <!-- FOOTER (PFLICHT - von unten kopieren) -->
   <footer class="nm-footer">
-    <div class="footer-content">
-      <div class="footer-col brand-col">
-        <h3>Nouveau<span class="accent">Mobilité</span></h3>
-        <p>L'excellence automobile à votre service. Une expérience de location redéfinie pour les conducteurs exigeants.</p>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Nouveau Mobilité</h3>
+        <p style="opacity: 0.8; font-size: 0.9rem; max-width: 250px;">L'élégance du mouvement. Une expérience de location de voiture redéfinie pour le conducteur moderne.</p>
       </div>
-      
       <div class="footer-col">
         <h4>Navigation</h4>
-        <a href="index.html">Accueil</a>
-        <a href="le-parc.html">Notre Flotte</a>
-        <a href="services.html">Services</a>
-        <a href="contact.html">Contact</a>
+        <ul class="footer-links">
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="leistungen.html">Notre Flotte</a></li>
+          <li><a href="ueber-uns.html">Services</a></li>
+        </ul>
       </div>
-
       <div class="footer-col">
         <h4>Légal</h4>
-        <a href="mentions.html">Mentions Légales</a>
-        <a href="confidentialite.html">Confidentialité</a>
-        <a href="cgv.html">CGV</a>
+        <ul class="footer-links">
+          <li><a href="impressum.html">Mentions Légales</a></li>
+          <li><a href="#">Confidentialité</a></li>
+          <li><a href="#">CGV</a></li>
+        </ul>
       </div>
-
-      <div class="footer-col social-col">
-        <h4>Suivez-nous</h4>
-        <div class="social-icons">
-          <a href="#" aria-label="Instagram">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-          </a>
-          <a href="#" aria-label="LinkedIn">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-          </a>
-        </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul class="footer-links">
+          <li><a href="mailto:info@nouveaumobilite.fr">info@nouveaumobilite.fr</a></li>
+          <li><a href="tel:+33123456789">+33 1 23 45 67 89</a></li>
+          <li style="margin-top: 1rem;">
+            <!-- Social Icons SVG -->
+            <svg width="24" height="24" fill="#fefae0" viewBox="0 0 24 24" style="margin-right: 10px; cursor: pointer;"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+            <svg width="24" height="24" fill="#fefae0" viewBox="0 0 24 24" style="cursor: pointer;"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </li>
+        </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2023 Nouveau Mobilité. Tous droits réservés.</p>
+      &copy; 2023 Nouveau Mobilité. Tous droits réservés.
     </div>
   </footer>
 </body>
