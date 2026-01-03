@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nouveau Mobilité - Leistungen</title>
+  <style>
+    :root {
+      --c-primary: #2d6a4f;
+      --c-secondary: #40916c;
+      --c-accent: #d4a373;
+      --c-bg: #fefae0;
+      --c-text: #283618;
+      --c-white: #ffffff;
+      --f-head: 'Poppins', sans-serif;
+      --f-body: 'Open Sans', sans-serif;
+      --radius: 16px;
+      --shadow-hover: 0 10px 30px rgba(45, 106, 79, 0.2);
+      --shadow-glow: 0 0 20px rgba(45, 106, 79, 0.4);
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Open+Sans:wght@300;400;600&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--c-bg);
+      color: var(--c-text);
+      font-family: var(--f-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--f-head);
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition);
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--c-primary), var(--c-secondary));
+      color: var(--c-white);
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-family: var(--f-head);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-glow);
+    }
+
+    @keyframes gradient-bg {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes float {
+      0% { transform: translate(0, 0); }
+      50% { transform: translate(0, -20px); }
+      100% { transform: translate(0, 0); }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInRight {
+      from { transform: translateX(100%); }
+      to { transform: translateX(0); }
+    }
+
+    @keyframes textGlow {
+      0% { text-shadow: 0 0 10px rgba(212, 163, 115, 0.2); }
+      50% { text-shadow: 0 0 20px rgba(212, 163, 115, 0.6); }
+      100% { text-shadow: 0 0 10px rgba(212, 163, 115, 0.2); }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVIGATION (PFLICHT - von unten kopieren) -->
+  <header class="nm-nav">
+    <div class="nm-nav-container">
+      <a href="index.html" class="nm-logo">
+        Nouveau<span class="accent">Mobilité</span>
+      </a>
+      
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <label for="nav-toggle" class="nav-burger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+
+      <nav class="nm-links">
+        <a href="index.html" class="nav-link">Accueil</a>
+        <a href="le-parc.html" class="nav-link">Notre Flotte</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="reservation.html" class="btn-primary nav-cta">Réserver</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <section class="nm-section">
+    <div class="section-header">
+      <h2 class="section-title">Nos Services</h2>
+      <div class="section-line"></div>
+      <p class="section-subtitle">Découvrez notre gamme complète de services conçus pour répondre à tous vos besoins de mobilité.</p>
+    </div>
+    <div class="section-content">
+      <div class="cards-grid">
+        <!-- Card 1 -->
+        <article class="nm-card">
+          <div class="card-icon">🚗</div>
+          <h3 class="card-title">Location de Voitures</h3>
+          <p class="card-desc">Profitez d'une large sélection de véhicules pour tous vos déplacements.</p>
+          <a href="#" class="card-link">Découvrir <span class="arrow">→</span></a>
+        </article>
+        <!-- Card 2 -->
+        <article class="nm-card">
+          <div class="card-icon">🔋</div>
+          <h3 class="card-title">Voitures Électriques</h3>
+          <p class="card-desc">Conduisez écologique avec notre flotte de véhicules électriques.</p>
+          <a href="#" class="card-link">Découvrir <span class="arrow">→</span></a>
+        </article>
+        <!-- Card 3 -->
+        <article class="nm-card">
+          <div class="card-icon">🛠️</div>
+          <h3 class="card-title">Assistance 24/7</h3>
+          <p class="card-desc">Nous sommes là pour vous aider à tout moment, où que vous soyez.</p>
+          <a href="#" class="card-link">Découvrir <span class="arrow">→</span></a>
+        </article>
+        <!-- Card 4 -->
+        <article class="nm-card">
+          <div class="card-icon">📞</div>
+          <h3 class="card-title">Support Client</h3>
+          <p class="card-desc">Notre équipe est prête à répondre à toutes vos questions.</p>
+          <a href="#" class="card-link">Découvrir <span class="arrow">→</span></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="nm-section">
+    <div class="section-header">
+      <h2 class="section-title">Pourquoi Choisir Nouveau Mobilité?</h2>
+      <div class="section-line"></div>
+      <p class="section-subtitle">Découvrez les avantages de notre service de location de voitures.</p>
+    </div>
+    <div class="section-content">
+      <ul>
+        <li>Large sélection de véhicules</li>
+        <li>Tarifs compétitifs</li>
+        <li>Assistance 24/7</li>
+        <li>Service client exceptionnel</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="nm-section">
+    <div class="section-header">
+      <h2 class="section-title">Contactez-nous</h2>
+      <div class="section-line"></div>
+      <p class="section-subtitle">Prêt à réserver votre véhicule? Contactez notre équipe dès aujourd'hui.</p>
+    </div>
+    <div class="section-content">
+      <a href="contact.html" class="btn-primary">Contactez-nous</a>
+    </div>
+  </section>
+
+  <!-- FOOTER (PFLICHT - von unten kopieren) -->
+  <footer class="nm-footer">
+    <div class="footer-content">
+      <div class="footer-col brand-col">
+        <h3>Nouveau<span class="accent">Mobilité</span></h3>
+        <p>L'excellence automobile à votre service. Une expérience de location redéfinie pour les conducteurs exigeants.</p>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="index.html">Accueil</a>
+        <a href="le-parc.html">Notre Flotte</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Légal</h4>
+        <a href="mentions.html">Mentions Légales</a>
+        <a href="confidentialite.html">Confidentialité</a>
+        <a href="cgv.html">CGV</a>
+      </div>
+
+      <div class="footer-col social-col">
+        <h4>Suivez-nous</h4>
+        <div class="social-icons">
+          <a href="#" aria-label="Instagram">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          </a>
+          <a href="#" aria-label="LinkedIn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2023 Nouveau Mobilité. Tous droits réservés.</p>
+    </div>
+  </footer>
+</body>
+</html>

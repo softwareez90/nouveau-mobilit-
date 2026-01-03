@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nouveau Mobilité - Kontakt</title>
+  <style>
+    :root {
+      --c-primary: #2d6a4f;
+      --c-secondary: #40916c;
+      --c-accent: #d4a373;
+      --c-bg: #fefae0;
+      --c-text: #283618;
+      --c-white: #ffffff;
+      --f-head: 'Poppins', sans-serif;
+      --f-body: 'Open Sans', sans-serif;
+      --radius: 16px;
+      --shadow-hover: 0 10px 30px rgba(45, 106, 79, 0.2);
+      --shadow-glow: 0 0 20px rgba(45, 106, 79, 0.4);
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Open+Sans:wght@300;400;600&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--c-bg);
+      color: var(--c-text);
+      font-family: var(--f-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--f-head);
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition);
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--c-primary), var(--c-secondary));
+      color: var(--c-white);
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-family: var(--f-head);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-glow);
+    }
+
+    @keyframes gradient-bg {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes float {
+      0% { transform: translate(0, 0); }
+      50% { transform: translate(0, -20px); }
+      100% { transform: translate(0, 0); }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInRight {
+      from { transform: translateX(100%); }
+      to { transform: translateX(0); }
+    }
+
+    @keyframes textGlow {
+      0% { text-shadow: 0 0 10px rgba(212, 163, 115, 0.2); }
+      50% { text-shadow: 0 0 20px rgba(212, 163, 115, 0.6); }
+      100% { text-shadow: 0 0 10px rgba(212, 163, 115, 0.2); }
+    }
+
+    .nm-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 20px 0;
+      background: rgba(254, 250, 224, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(40, 54, 24, 0.05);
+    }
+
+    .nm-nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nm-logo {
+      font-family: var(--f-head);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--c-primary);
+      letter-spacing: -0.5px;
+    }
+
+    .nm-logo .accent {
+      color: var(--c-accent);
+    }
+
+    .nm-links {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .nav-link {
+      font-family: var(--f-head);
+      font-weight: 400;
+      font-size: 0.95rem;
+      color: var(--c-text);
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--c-accent);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--c-primary);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-toggle {
+      display: none;
+    }
+
+    .nav-burger {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      z-index: 1002;
+    }
+
+    .nav-burger span {
+      display: block;
+      width: 25px;
+      height: 2px;
+      background: var(--c-primary);
+      transition: all 0.3s ease;
+    }
+
+    @media (max-width: 992px) {
+      .nav-burger {
+        display: flex;
+      }
+
+      .nm-links {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 80%;
+        max-width: 400px;
+        height: 100vh;
+        background: rgba(254, 250, 224, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+        box-shadow: -10px 0 30px rgba(0,0,0,0.05);
+      }
+
+      .nav-toggle:checked ~ .nm-links {
+        transform: translateX(0);
+      }
+
+      .nav-toggle:checked ~ .nav-burger span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 6px);
+      }
+      .nav-toggle:checked ~ .nav-burger span:nth-child(2) {
+        opacity: 0;
+      }
+      .nav-toggle:checked ~ .nav-burger span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -6px);
+      }
+    }
+
+    .nm-footer {
+      background: linear-gradient(180deg, #1b4332 0%, #000000 100%);
+      color: var(--c-white);
+      padding: 80px 0 30px;
+      margin-top: 100px;
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 5%;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+    }
+
+    .footer-col h3 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+
+    .footer-col .accent {
+      color: var(--c-accent);
+    }
+
+    .footer-col p {
+      opacity: 0.8;
+      max-width: 300px;
+      font-size: 0.9rem;
+    }
+
+    .footer-col h4 {
+      color: var(--c-accent);
+      font-size: 1.1rem;
+      margin-bottom: 25px;
+    }
+
+    .footer-col a {
+      display: block;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 12px;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+
+    .footer-col a:hover {
+      color: var(--c-white);
+      transform: translateX(5px);
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50%;
+    }
+
+    .social-icons a:hover {
+      border-color: var(--c-accent);
+      background: var(--c-accent);
+      color: var(--c-text);
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      max-width: 1400px;
+      margin: 60px auto 0;
+      padding: 30px 5% 0;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+      font-size: 0.85rem;
+      opacity: 0.5;
+    }
+
+    @media (max-width: 768px) {
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    .nm-section {
+      padding: 120px 5%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 80px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      color: var(--c-primary);
+      margin-bottom: 20px;
+    }
+
+    .section-line {
+      width: 60px;
+      height: 3px;
+      background: var(--c-accent);
+      margin: 0 auto 20px;
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: var(--c-text);
+      opacity: 0.7;
+    }
+
+    .section-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+    }
+
+    .nm-form {
+      background: #ffffff;
+      padding: 50px;
+      border-radius: var(--radius);
+      box-shadow: 0 20px 60px rgba(45, 106, 79, 0.05);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .form-group {
+      position: relative;
+      margin-bottom: 30px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 15px 0;
+      border: none;
+      border-bottom: 1px solid rgba(40, 54, 24, 0.2);
+      background: transparent;
+      font-family: var(--f-body);
+      font-size: 1rem;
+      color: var(--c-text);
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-group label {
+      position: absolute;
+      top: 15px;
+      left: 0;
+      font-size: 1rem;
+      color: rgba(40, 54, 24, 0.5);
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-bottom-color: var(--c-accent);
+    }
+
+    .form-group input:focus + label,
+    .form-group input:not(:placeholder-shown) + label,
+    .form-group textarea:focus + label,
+    .form-group textarea:not(:placeholder-shown) + label {
+      top: -10px;
+      font-size: 0.8rem;
+      color: var(--c-accent);
+    }
+
+    .form-group select {
+      color: var(--c-text);
+      padding-left: 0;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVIGATION (PFLICHT - von unten kopieren) -->
+  <header class="nm-nav">
+    <div class="nm-nav-container">
+      <a href="index.html" class="nm-logo">
+        Nouveau<span class="accent">Mobilité</span>
+      </a>
+      
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <label for="nav-toggle" class="nav-burger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+
+      <nav class="nm-links">
+        <a href="index.html" class="nav-link">Accueil</a>
+        <a href="ueber-uns.html" class="nav-link">À propos</a>
+        <a href="leistungen.html" class="nav-link">Services</a>
+        <a href="kontakt.html" class="nav-link">Contact</a>
+        <a href="impressum.html" class="nav-link">Mentions légales</a>
+      </nav>
+    </div>
+  </header>
+  
+  <!-- MAIN CONTENT -->
+  <section class="nm-section">
+    <div class="section-header">
+      <h2 class="section-title">Contact</h2>
+      <div class="section-line"></div>
+      <p class="section-subtitle">Nous sommes là pour vous aider. Contactez-nous pour toute question ou demande.</p>
+    </div>
+    <div class="section-content">
+      <div>
+        <form class="nm-form">
+          <div class="form-group">
+            <input type="text" id="name" required placeholder=" ">
+            <label for="name">Votre Nom</label>
+          </div>
+          <div class="form-group">
+            <input type="email" id="email" required placeholder=" ">
+            <label for="email">Adresse Email</label>
+          </div>
+          <div class="form-group">
+            <select id="subject">
+              <option value="" disabled selected>Sujet de la demande</option>
+              <option value="reservation">Réservation</option>
+              <option value="support">Service Client</option>
+              <option value="b2b">Partenariat Entreprise</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <textarea id="message" rows="4" required placeholder=" "></textarea>
+            <label for="message">Votre Message</label>
+          </div>
+          <button type="submit" class="btn-primary">Envoyer la demande</button>
+        </form>
+      </div>
+      <div>
+        <h3>Contactez-nous</h3>
+        <p>Adresse: 122 Rue Amelot, 75011 Paris</p>
+        <p>Email: <a href="mailto:contact@nouveaumobilite.fr">contact@nouveaumobilite.fr</a></p>
+        <p>Téléphone: <a href="tel:+33123456789">+33 1 23 45 67 89</a></p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- FOOTER (PFLICHT - von unten kopieren) -->
+  <footer class="nm-footer">
+    <div class="footer-content">
+      <div class="footer-col brand-col">
+        <h3>Nouveau<span class="accent">Mobilité</span></h3>
+        <p>L'excellence automobile à votre service. Une expérience de location redéfinie pour les conducteurs exigeants.</p>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="index.html">Accueil</a>
+        <a href="le-parc.html">Notre Flotte</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Légal</h4>
+        <a href="mentions.html">Mentions Légales</a>
+        <a href="confidentialite.html">Confidentialité</a>
+        <a href="cgv.html">CGV</a>
+      </div>
+
+      <div class="footer-col social-col">
+        <h4>Suivez-nous</h4>
+        <div class="social-icons">
+          <a href="#" aria-label="Instagram">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          </a>
+          <a href="#" aria-label="LinkedIn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2023 Nouveau Mobilité. Tous droits réservés.</p>
+    </div>
+  </footer>
+</body>
+</html>

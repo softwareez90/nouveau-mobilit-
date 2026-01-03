@@ -1,0 +1,100 @@
+/* Design System - Auto-Generated */
+:root {
+  --c-primary: #2d6a4f;
+  --c-secondary: #40916c;
+  --c-accent: #d4a373;
+  --c-bg: #fefae0;
+  --c-text: #283618;
+  --c-white: #ffffff;
+  --f-head: 'Poppins', sans-serif;
+  --f-body: 'Open Sans', sans-serif;
+  --radius: 16px;
+  --shadow-hover: 0 10px 30px rgba(45, 106, 79, 0.2);
+  --shadow-glow: 0 0 20px rgba(45, 106, 79, 0.4);
+  --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Open+Sans:wght@300;400;600&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--c-bg);
+  color: var(--c-text);
+  font-family: var(--f-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--f-head);
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition);
+}
+
+.btn-primary {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--c-primary), var(--c-secondary));
+  color: var(--c-white);
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-family: var(--f-head);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+}
+@keyframes gradient-bg {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes float {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(0, -20px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes textGlow {
+  0% { text-shadow: 0 0 10px rgba(212, 163, 115, 0.2); }
+  50% { text-shadow: 0 0 20px rgba(212, 163, 115, 0.6); }
+  100% { text-shadow: 0 0 10px rgba(212, 163, 115, 0.2); }
+}

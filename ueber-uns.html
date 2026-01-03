@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nouveau Mobilité - Über uns</title>
+  <style>
+    :root {
+      --c-primary: #2d6a4f;
+      --c-secondary: #40916c;
+      --c-accent: #d4a373;
+      --c-bg: #fefae0;
+      --c-text: #283618;
+      --c-white: #ffffff;
+      --f-head: 'Poppins', sans-serif;
+      --f-body: 'Open Sans', sans-serif;
+      --radius: 16px;
+      --shadow-hover: 0 10px 30px rgba(45, 106, 79, 0.2);
+      --shadow-glow: 0 0 20px rgba(45, 106, 79, 0.4);
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Open+Sans:wght@300;400;600&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--c-bg);
+      color: var(--c-text);
+      font-family: var(--f-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--f-head);
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition);
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--c-primary), var(--c-secondary));
+      color: var(--c-white);
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-family: var(--f-head);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-glow);
+    }
+
+    @keyframes gradient-bg {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes float {
+      0% { transform: translate(0, 0); }
+      50% { transform: translate(0, -20px); }
+      100% { transform: translate(0, 0); }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInRight {
+      from { transform: translateX(100%); }
+      to { transform: translateX(0); }
+    }
+
+    @keyframes textGlow {
+      0% { text-shadow: 0 0 10px rgba(212, 163, 115, 0.2); }
+      50% { text-shadow: 0 0 20px rgba(212, 163, 115, 0.6); }
+      100% { text-shadow: 0 0 10px rgba(212, 163, 115, 0.2); }
+    }
+
+    /* HIER: Alle CSS Variables, Base Styles, Animations, Component Styles */
+  </style>
+</head>
+<body>
+  <!-- NAVIGATION (PFLICHT - von unten kopieren) -->
+  <header class="nm-nav">
+    <div class="nm-nav-container">
+      <a href="index.html" class="nm-logo">
+        Nouveau<span class="accent">Mobilité</span>
+      </a>
+      
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <label for="nav-toggle" class="nav-burger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+
+      <nav class="nm-links">
+        <a href="index.html" class="nav-link">Accueil</a>
+        <a href="ueber-uns.html" class="nav-link">À propos</a>
+        <a href="leistungen.html" class="nav-link">Services</a>
+        <a href="kontakt.html" class="nav-link">Contact</a>
+        <a href="impressum.html" class="nav-link">Mentions légales</a>
+      </nav>
+    </div>
+  </header>
+
+  <style>
+    .nm-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 20px 0;
+      background: rgba(254, 250, 224, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(40, 54, 24, 0.05);
+    }
+
+    .nm-nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nm-logo {
+      font-family: var(--f-head);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--c-primary);
+      letter-spacing: -0.5px;
+    }
+
+    .nm-logo .accent {
+      color: var(--c-accent);
+    }
+
+    .nm-links {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .nav-link {
+      font-family: var(--f-head);
+      font-weight: 400;
+      font-size: 0.95rem;
+      color: var(--c-text);
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--c-accent);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--c-primary);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* Mobile Menu */
+    .nav-toggle {
+      display: none;
+    }
+
+    .nav-burger {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      z-index: 1002;
+    }
+
+    .nav-burger span {
+      display: block;
+      width: 25px;
+      height: 2px;
+      background: var(--c-primary);
+      transition: all 0.3s ease;
+    }
+
+    @media (max-width: 992px) {
+      .nav-burger {
+        display: flex;
+      }
+
+      .nm-links {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 80%;
+        max-width: 400px;
+        height: 100vh;
+        background: rgba(254, 250, 224, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+        box-shadow: -10px 0 30px rgba(0,0,0,0.05);
+      }
+
+      .nav-toggle:checked ~ .nm-links {
+        transform: translateX(0);
+      }
+
+      .nav-toggle:checked ~ .nav-burger span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 6px);
+      }
+      .nav-toggle:checked ~ .nav-burger span:nth-child(2) {
+        opacity: 0;
+      }
+      .nav-toggle:checked ~ .nav-burger span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -6px);
+      }
+    }
+  </style>
+
+  <!-- MAIN CONTENT -->
+  <section class="nm-section">
+    <div class="section-header">
+      <h2 class="section-title">Über uns</h2>
+      <div class="section-line"></div>
+      <p class="section-subtitle">Découvrez notre histoire, notre mission et notre vision pour l'avenir de la mobilité.</p>
+    </div>
+    <div class="section-content">
+      <p>Nouveau Mobilité a été fondée avec l'objectif de redéfinir l'expérience de location automobile. Depuis notre création, nous nous engageons à offrir un service exceptionnel à nos clients, en mettant l'accent sur la qualité, la fiabilité et l'innovation.</p>
+      <p>Notre mission est de rendre la mobilité accessible à tous, tout en respectant l'environnement. Nous croyons en un avenir où chaque trajet est une expérience agréable et sans stress, grâce à notre flotte moderne et notre service client dévoué.</p>
+      <p>Nous envisageons un monde où la mobilité est synonyme de liberté et de durabilité. Chez Nouveau Mobilité, nous travaillons chaque jour pour réaliser cette vision, en investissant dans des technologies vertes et en développant des solutions innovantes pour nos clients.</p>
+    </div>
+  </section>
+
+  <section class="nm-section">
+    <div class="section-header">
+      <h2 class="section-title">Nos valeurs</h2>
+      <div class="section-line"></div>
+      <p class="section-subtitle">Les principes qui guident notre entreprise.</p>
+    </div>
+    <div class="section-content">
+      <article class="nm-card">
+        <div class="card-icon">🚗</div>
+        <h3 class="card-title">Innovation</h3>
+        <p class="card-desc">Nous adoptons les dernières technologies pour améliorer l'expérience de nos clients.</p>
+        <a href="#" class="card-link">Découvrir <span class="arrow">→</span></a>
+      </article>
+      <article class="nm-card">
+        <div class="card-icon">🔋</div>
+        <h3 class="card-title">Durabilité</h3>
+        <p class="card-desc">Notre engagement envers l'environnement se reflète dans notre flotte de véhicules écologiques.</p>
+        <a href="#" class="card-link">Découvrir <span class="arrow">→</span></a>
+      </article>
+      <article class="nm-card">
+        <div class="card-icon">🛠️</div>
+        <h3 class="card-title">Fiabilité</h3>
+        <p class="card-desc">Nous garantissons des véhicules en parfait état pour chaque location.</p>
+        <a href="#" class="card-link">Découvrir <span class="arrow">→</span></a>
+      </article>
+      <article class="nm-card">
+        <div class="card-icon">📞</div>
+        <h3 class="card-title">Service Client</h3>
+        <p class="card-desc">Notre équipe est toujours prête à vous aider, à chaque étape de votre expérience.</p>
+        <a href="#" class="card-link">Découvrir <span class="arrow">→</span></a>
+      </article>
+    </div>
+  </section>
+
+  <section class="nm-section">
+    <div class="section-header">
+      <h2 class="section-title">Contactez-nous</h2>
+      <div class="section-line"></div>
+      <p class="section-subtitle">Prêt à découvrir nos services ? Contactez-nous dès aujourd'hui.</p>
+    </div>
+    <div class="section-content">
+      <a href="kontakt.html" class="btn-primary">Contactez-nous</a>
+    </div>
+  </section>
+
+  <!-- FOOTER (PFLICHT - von unten kopieren) -->
+  <footer class="nm-footer">
+    <div class="footer-content">
+      <div class="footer-col brand-col">
+        <h3>Nouveau<span class="accent">Mobilité</span></h3>
+        <p>L'excellence automobile à votre service. Une expérience de location redéfinie pour les conducteurs exigeants.</p>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="index.html">Accueil</a>
+        <a href="ueber-uns.html">À propos</a>
+        <a href="leistungen.html">Services</a>
+        <a href="kontakt.html">Contact</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Légal</h4>
+        <a href="impressum.html">Mentions légales</a>
+        <a href="confidentialite.html">Confidentialité</a>
+        <a href="cgv.html">CGV</a>
+      </div>
+
+      <div class="footer-col social-col">
+        <h4>Suivez-nous</h4>
+        <div class="social-icons">
+          <a href="#" aria-label="Instagram">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          </a>
+          <a href="#" aria-label="LinkedIn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2023 Nouveau Mobilité. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <style>
+    .nm-footer {
+      background: linear-gradient(180deg, #1b4332 0%, #000000 100%);
+      color: var(--c-white);
+      padding: 80px 0 30px;
+      margin-top: 100px;
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 5%;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+    }
+
+    .footer-col h3 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+
+    .footer-col .accent {
+      color: var(--c-accent);
+    }
+
+    .footer-col p {
+      opacity: 0.8;
+      max-width: 300px;
+      font-size: 0.9rem;
+    }
+
+    .footer-col h4 {
+      color: var(--c-accent);
+      font-size: 1.1rem;
+      margin-bottom: 25px;
+    }
+
+    .footer-col a {
+      display: block;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 12px;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+
+    .footer-col a:hover {
+      color: var(--c-white);
+      transform: translateX(5px);
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50%;
+    }
+
+    .social-icons a:hover {
+      border-color: var(--c-accent);
+      background: var(--c-accent);
+      color: var(--c-text);
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      max-width: 1400px;
+      margin: 60px auto 0;
+      padding: 30px 5% 0;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+      font-size: 0.85rem;
+      opacity: 0.5;
+    }
+
+    @media (max-width: 768px) {
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+  </style>
+</body>
+</html>
