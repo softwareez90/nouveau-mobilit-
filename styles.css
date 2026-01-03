@@ -1,17 +1,17 @@
 /* Design System - Auto-Generated */
 :root {
-  --col-primary: #2d6a4f;
-  --col-secondary: #40916c;
-  --col-accent: #d4a373;
-  --col-bg: #fefae0;
-  --col-text: #283618;
-  --font-heading: 'Poppins', sans-serif;
-  --font-body: 'Open Sans', sans-serif;
+  --color-primary: #2d6a4f;
+  --color-secondary: #40916c;
+  --color-accent: #d4a373;
+  --color-bg: #fefae0;
+  --color-text: #283618;
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
   --radius: 16px;
   --shadow-hover: 0 10px 30px rgba(45, 106, 79, 0.2);
   --nav-height: 80px;
 }
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Open+Sans:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
 
 * {
   box-sizing: border-box;
@@ -19,21 +19,17 @@
   padding: 0;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
   font-family: var(--font-body);
-  background-color: var(--col-bg);
-  color: var(--col-text);
   line-height: 1.6;
-  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.2;
 }
 
@@ -43,30 +39,57 @@ a {
   transition: all 0.3s ease;
 }
 
-.btn-primary {
-  display: inline-block;
-  padding: 14px 32px;
-  background: linear-gradient(135deg, var(--col-primary), var(--col-secondary));
-  color: #fff;
-  font-family: var(--font-heading);
-  font-weight: 600;
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 32px;
   border-radius: var(--radius);
-  border: none;
+  font-weight: 600;
+  font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  color: #ffffff;
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
   box-shadow: 0 0 20px rgba(45, 106, 79, 0.4);
 }
-@keyframes gradientMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+
+.btn-secondary {
+  background: transparent;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+}
+
+.btn-secondary:hover {
+  background: var(--color-primary);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes float {
@@ -75,13 +98,13 @@ a {
   100% { transform: translateY(0px); }
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes floatReverse {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(15px); }
+  100% { transform: translateY(0px); }
 }
 
-@keyframes glowText {
-  0% { text-shadow: 0 0 5px rgba(255,255,255,0.1); }
-  50% { text-shadow: 0 0 20px rgba(255,255,255,0.4); }
-  100% { text-shadow: 0 0 5px rgba(255,255,255,0.1); }
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
 }

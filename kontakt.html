@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nouveau Mobilité - Kontakt</title>
+  <title>Nouveau Mobilité - Contact</title>
   <style>
     :root {
-      --col-primary: #2d6a4f;
-      --col-secondary: #40916c;
-      --col-accent: #d4a373;
-      --col-bg: #fefae0;
-      --col-text: #283618;
-      --font-heading: 'Poppins', sans-serif;
-      --font-body: 'Open Sans', sans-serif;
+      --color-primary: #2d6a4f;
+      --color-secondary: #40916c;
+      --color-accent: #d4a373;
+      --color-bg: #fefae0;
+      --color-text: #283618;
+      --font-heading: 'Playfair Display', serif;
+      --font-body: 'Inter', sans-serif;
       --radius: 16px;
       --shadow-hover: 0 10px 30px rgba(45, 106, 79, 0.2);
       --nav-height: 80px;
     }
 
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Open+Sans:wght@300;400;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
 
     * {
       box-sizing: border-box;
@@ -26,21 +26,17 @@
       padding: 0;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
+      background-color: var(--color-bg);
+      color: var(--color-text);
       font-family: var(--font-body);
-      background-color: var(--col-bg);
-      color: var(--col-text);
       line-height: 1.6;
-      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
     h1, h2, h3, h4, h5, h6 {
       font-family: var(--font-heading);
-      font-weight: 600;
+      font-weight: 700;
       line-height: 1.2;
     }
 
@@ -50,20 +46,24 @@
       transition: all 0.3s ease;
     }
 
-    .btn-primary {
-      display: inline-block;
-      padding: 14px 32px;
-      background: linear-gradient(135deg, var(--col-primary), var(--col-secondary));
-      color: #fff;
-      font-family: var(--font-heading);
-      font-weight: 600;
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 32px;
       border-radius: var(--radius);
-      border: none;
+      font-weight: 600;
+      font-size: 1rem;
       cursor: pointer;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: none;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      color: #ffffff;
     }
 
     .btn-primary:hover {
@@ -71,10 +71,33 @@
       box-shadow: 0 0 20px rgba(45, 106, 79, 0.4);
     }
 
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid var(--color-primary);
+      color: var(--color-primary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--color-primary);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes float {
@@ -83,423 +106,376 @@
       100% { transform: translateY(0px); }
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes floatReverse {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(15px); }
+      100% { transform: translateY(0px); }
     }
 
-    @keyframes glowText {
-      0% { text-shadow: 0 0 5px rgba(255,255,255,0.1); }
-      50% { text-shadow: 0 0 20px rgba(255,255,255,0.4); }
-      100% { text-shadow: 0 0 5px rgba(255,255,255,0.1); }
+    @keyframes slideInRight {
+      from { transform: translateX(100%); }
+      to { transform: translateX(0); }
     }
 
-    /* Navigation Styles */
-    .nm-nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
+    .nav-header {
+      background-color: var(--color-primary);
       height: var(--nav-height);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .nav-container {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0 5%;
-      background: rgba(254, 250, 224, 0.85);
-      backdrop-filter: blur(10px);
-      z-index: 1000;
-      border-bottom: 1px solid rgba(40, 54, 24, 0.05);
     }
 
-    .nm-logo {
+    .nav-logo .logo-text {
       font-family: var(--font-heading);
       font-size: 1.5rem;
+      color: #ffffff;
       font-weight: 700;
-      color: var(--col-primary);
       letter-spacing: -0.5px;
     }
 
-    .nm-logo span {
-      color: var(--col-accent);
-    }
-
-    .nm-desktop-links {
-      display: none;
-    }
-
-    /* Hamburger Checkbox Hack */
-    .nav-toggle-checkbox {
-      display: none;
-    }
-
-    .hamburger {
-      width: 30px;
-      height: 24px;
-      position: relative;
-      cursor: pointer;
-      z-index: 1002;
+    .nav-list {
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      list-style: none;
+      align-items: center;
+      gap: 40px;
     }
 
-    .hamburger span {
+    .nav-link {
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 0.95rem;
+      position: relative;
+    }
+
+    .nav-link:not(.btn)::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: var(--color-accent);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link.btn {
+      padding: 10px 24px;
+      background: var(--color-accent);
+      color: var(--color-text);
+    }
+    
+    .nav-link.btn:hover {
+       background: #ffffff;
+    }
+
+    .nav-checkbox {
+      display: none;
+    }
+
+    .nav-burger {
+      display: none;
+      cursor: pointer;
+      width: 30px;
+      height: 20px;
+      position: relative;
+      z-index: 1002;
+    }
+
+    .line {
       display: block;
       width: 100%;
       height: 2px;
-      background: var(--col-primary);
-      border-radius: 2px;
+      background-color: #ffffff;
+      position: absolute;
       transition: all 0.3s ease;
     }
 
-    /* Hamburger Animation */
-    .nav-toggle-checkbox:checked ~ .hamburger span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 10px);
-    }
-    .nav-toggle-checkbox:checked ~ .hamburger span:nth-child(2) {
-      opacity: 0;
-    }
-    .nav-toggle-checkbox:checked ~ .hamburger span:nth-child(3) {
-      transform: rotate(-45deg) translate(5px, -11px);
+    .line-1 { top: 0; }
+    .line-2 { top: 50%; transform: translateY(-50%); }
+    .line-3 { bottom: 0; }
+
+    @media (max-width: 768px) {
+      .nav-burger {
+        display: block;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 80%;
+        max-width: 400px;
+        height: 100vh;
+        background: rgba(45, 106, 79, 0.95);
+        backdrop-filter: blur(10px);
+        padding-top: 100px;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        z-index: 1001;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.2);
+      }
+
+      .nav-list {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 40px;
+      }
+
+      .nav-link {
+        font-size: 1.5rem;
+        font-family: var(--font-heading);
+      }
+
+      #nav-toggle:checked ~ .nav-menu {
+        transform: translateX(0);
+      }
+
+      #nav-toggle:checked ~ .nav-burger .line-1 {
+        top: 50%;
+        transform: translateY(-50%) rotate(45deg);
+      }
+
+      #nav-toggle:checked ~ .nav-burger .line-2 {
+        opacity: 0;
+      }
+
+      #nav-toggle:checked ~ .nav-burger .line-3 {
+        bottom: 50%;
+        transform: translateY(50%) rotate(-45deg);
+      }
     }
 
-    /* Mobile Menu Overlay */
-    .mobile-menu {
-      position: fixed;
-      top: 0;
-      right: 0;
-      width: 100%;
-      height: 100vh;
-      background: rgba(254, 250, 224, 0.95);
-      backdrop-filter: blur(15px);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      transform: translateX(100%);
-      transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-      z-index: 1001;
+    .nm-footer {
+      padding: 80px 0 40px;
+      background-color: var(--color-bg);
+      border-top: 1px solid rgba(40, 54, 24, 0.1);
+      text-align: center;
     }
 
-    .nav-toggle-checkbox:checked ~ .mobile-menu {
-      transform: translateX(0);
-    }
-
-    .mobile-link {
+    .footer-logo {
       font-family: var(--font-heading);
       font-size: 2rem;
-      font-weight: 300;
-      color: var(--col-text);
-      margin: 1.5rem 0;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.3s ease;
+      color: var(--color-primary);
+      margin-bottom: 24px;
     }
 
-    .nav-toggle-checkbox:checked ~ .mobile-menu .mobile-link {
-      opacity: 1;
-      transform: translateY(0);
-      transition-delay: 0.2s;
+    .footer-nav {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
     }
 
-    .nav-toggle-checkbox:checked ~ .mobile-menu .mobile-link:nth-child(2) { transition-delay: 0.3s; }
-    .nav-toggle-checkbox:checked ~ .mobile-menu .mobile-link:nth-child(3) { transition-delay: 0.4s; }
-    .nav-toggle-checkbox:checked ~ .mobile-menu .mobile-link:nth-child(4) { transition-delay: 0.5s; }
-
-    @media (min-width: 992px) {
-      .hamburger { display: none; }
-      .mobile-menu { display: none; }
-      .nm-desktop-links {
-        display: flex;
-        align-items: center;
-        gap: 3rem;
-      }
-      .nav-link {
-        font-family: var(--font-heading);
-        font-weight: 400;
-        font-size: 0.95rem;
-        color: var(--col-text);
-        position: relative;
-      }
-      .nav-link::after {
-        content: '';
-        position: absolute;
-        width: 0;
-        height: 1px;
-        bottom: -4px;
-        left: 0;
-        background-color: var(--col-accent);
-        transition: width 0.3s ease;
-      }
-      .nav-link:hover {
-        color: var(--col-primary);
-      }
-      .nav-link:hover::after {
-        width: 100%;
-      }
-    }
-
-    /* Footer Styles */
-    .nm-footer {
-      background: linear-gradient(180deg, var(--col-primary) 0%, #1b4332 100%);
-      color: #fff;
-      padding: 4rem 5% 2rem;
-      margin-top: 4rem;
-    }
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 3rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .footer-brand h3 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      color: var(--col-bg);
-    }
-    .footer-col h4 {
-      color: var(--col-accent);
-      font-size: 1.1rem;
-      margin-bottom: 1.5rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    .footer-links {
-      list-style: none;
-    }
-    .footer-links li {
-      margin-bottom: 0.8rem;
-    }
-    .footer-links a {
-      color: rgba(255,255,255,0.7);
+    .footer-nav a {
       font-size: 0.9rem;
-      transition: color 0.3s;
-    }
-    .footer-links a:hover {
-      color: var(--col-accent);
-      padding-left: 5px;
-    }
-    .footer-bottom {
-      margin-top: 3rem;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      text-align: center;
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.5);
-    }
-    @media(min-width: 768px) {
-      .footer-grid {
-        grid-template-columns: 1.5fr 1fr 1fr 1fr;
-      }
+      color: var(--color-text);
+      font-weight: 500;
+      position: relative;
     }
 
-    /* Section Wrapper Styles */
-    .nm-section {
-      padding: 6rem 5%;
-      max-width: 1400px;
-      margin: 0 auto;
+    .footer-nav a::before {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 6px;
+      height: 6px;
+      background-color: var(--color-accent);
+      border-radius: 50%;
+      opacity: 0;
+      transition: opacity 0.3s;
     }
-    
+
+    .footer-nav a:hover::before {
+      opacity: 1;
+    }
+
+    .copyright {
+      font-size: 0.8rem;
+      color: var(--color-secondary);
+      opacity: 0.8;
+    }
+
+    .nm-section {
+      padding: 100px 0;
+    }
+
     .section-header {
       text-align: center;
-      margin-bottom: 4rem;
+      margin-bottom: 60px;
       max-width: 700px;
       margin-left: auto;
       margin-right: auto;
     }
 
-    .section-subtitle {
-      display: block;
-      color: var(--col-accent);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-size: 0.85rem;
-      margin-bottom: 0.5rem;
-    }
-
     .section-title {
       font-size: 2.5rem;
-      color: var(--col-text);
-      margin-bottom: 1rem;
+      color: var(--color-primary);
+      margin-bottom: 16px;
+      position: relative;
+      display: inline-block;
     }
 
-    .section-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-
-    @media (min-width: 768px) {
-      .section-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    /* Kontakt Form Styles */
-    .nm-form-container {
-      background: #fff;
-      padding: 3rem;
-      border-radius: var(--radius);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.05);
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    
-    .form-group {
-      margin-bottom: 1.5rem;
-    }
-
-    .form-label {
+    .section-title::after {
+      content: '';
       display: block;
-      margin-bottom: 0.5rem;
+      width: 60px;
+      height: 3px;
+      background: var(--color-accent);
+      margin: 8px auto 0;
+      border-radius: 2px;
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: var(--color-text);
+      opacity: 0.8;
+    }
+
+    .section-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+    }
+
+    .contact-wrapper {
+      background: #ffffff;
+      padding: 40px;
+      border-radius: var(--radius);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+    }
+
+    .nm-form {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group label {
       font-weight: 600;
       font-size: 0.9rem;
-      color: var(--col-text);
+      color: var(--color-primary);
     }
 
-    .form-input,
-    .form-textarea {
-      width: 100%;
-      padding: 1rem;
-      border: 1px solid #e0e0e0;
-      border-radius: var(--radius);
+    .form-group input,
+    .form-group textarea {
+      padding: 16px;
+      border: 1px solid rgba(40, 54, 24, 0.2);
+      border-radius: 8px;
       font-family: var(--font-body);
       font-size: 1rem;
+      background: var(--color-bg);
       transition: border-color 0.3s, box-shadow 0.3s;
-      background: #fafafa;
     }
 
-    .form-input:focus,
-    .form-textarea:focus {
+    .form-group input:focus,
+    .form-group textarea:focus {
       outline: none;
-      border-color: var(--col-secondary);
-      box-shadow: 0 0 0 4px rgba(64, 145, 108, 0.1);
-      background: #fff;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 4px rgba(45, 106, 79, 0.1);
     }
 
-    .form-textarea {
-      resize: vertical;
-      min-height: 120px;
-    }
-
-    .form-submit {
+    .form-btn {
       width: 100%;
-      margin-top: 1rem;
+      margin-top: 16px;
     }
   </style>
 </head>
 <body>
   <!-- NAVIGATION (PFLICHT - von unten kopieren) -->
-  <nav class="nm-nav">
-    <a href="index.html" class="nm-logo">Nouveau <span>Mobilité</span></a>
-    
-    <!-- Desktop Nav -->
-    <div class="nm-desktop-links">
-      <a href="index.html" class="nav-link">Accueil</a>
-      <a href="leistungen.html" class="nav-link">Véhicules</a>
-      <a href="ueber-uns.html" class="nav-link">L'Agence</a>
-      <a href="kontakt.html" class="btn-primary">Réserver</a>
-    </div>
+  <header class="nav-header">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-text">Nouveau Mobilité</span>
+      </a>
 
-    <!-- Mobile Toggle -->
-    <input type="checkbox" id="nav-toggle" class="nav-toggle-checkbox">
-    <label for="nav-toggle" class="hamburger">
-      <span></span>
-      <span></span>
-      <span></span>
-    </label>
+      <input type="checkbox" id="nav-toggle" class="nav-checkbox">
+      <label for="nav-toggle" class="nav-burger">
+        <span class="line line-1"></span>
+        <span class="line line-2"></span>
+        <span class="line line-3"></span>
+      </label>
 
-    <!-- Mobile Menu -->
-    <div class="mobile-menu">
-      <a href="index.html" class="mobile-link">Accueil</a>
-      <a href="leistungen.html" class="mobile-link">Véhicules</a>
-      <a href="ueber-uns.html" class="mobile-link">L'Agence</a>
-      <a href="kontakt.html" class="mobile-link" style="color: var(--col-primary); font-weight: 600;">Réserver</a>
+      <nav class="nav-menu">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Accueil</a></li>
+          <li><a href="ueber-uns.html" class="nav-link">À propos</a></li>
+          <li><a href="leistungen.html" class="nav-link">Flotte</a></li>
+          <li><a href="kontakt.html" class="nav-link btn btn-primary nav-cta">Contact</a></li>
+        </ul>
+      </nav>
     </div>
-  </nav>
-  
+  </header>
+
   <!-- MAIN CONTENT -->
   <section class="nm-section">
-    <div class="section-header">
-      <span class="section-subtitle">Contact</span>
-      <h2 class="section-title">Contactez-nous</h2>
-      <p>Nous sommes là pour vous aider. Remplissez le formulaire ci-dessous ou contactez-nous directement via nos coordonnées.</p>
-    </div>
-    
-    <div class="section-grid">
-      <div>
-        <div class="nm-form-container">
-          <form action="#" method="POST">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Nous sommes là pour vous</h2>
+        <p class="section-subtitle">Votre contact direct avec nous. Nous vous répondrons dans les plus brefs délais.</p>
+      </div>
+      <div class="section-content">
+        <div class="contact-wrapper">
+          <form class="nm-form">
             <div class="form-group">
-              <label class="form-label">Nom complet</label>
-              <input type="text" class="form-input" placeholder="Votre nom" required>
+              <label for="name">Nom complet</label>
+              <input type="text" id="name" placeholder="Votre nom" required>
             </div>
             <div class="form-group">
-              <label class="form-label">Email</label>
-              <input type="email" class="form-input" placeholder="votre@email.com" required>
+              <label for="email">Adresse E-mail</label>
+              <input type="email" id="email" placeholder="votre@email.com" required>
             </div>
             <div class="form-group">
-              <label class="form-label">Date de location souhaitée</label>
-              <input type="date" class="form-input">
+              <label for="message">Message</label>
+              <textarea id="message" rows="4" placeholder="Comment pouvons-nous vous aider ?" required></textarea>
             </div>
-            <div class="form-group">
-              <label class="form-label">Message</label>
-              <textarea class="form-textarea" placeholder="Je suis intéressé par le modèle..." required></textarea>
-            </div>
-            <button type="submit" class="btn-primary form-submit">Envoyer la demande</button>
+            <button type="submit" class="btn btn-primary form-btn">Envoyer le message</button>
           </form>
         </div>
-      </div>
-      <div>
-        <h3>Nos coordonnées</h3>
-        <p>Adresse : 122 Rue Amelot, 75011 Paris</p>
-        <p>Email : <a href="mailto:info@nouveaumobilite.fr">info@nouveaumobilite.fr</a></p>
-        <p>Téléphone : <a href="tel:+33123456789">+33 1 23 45 67 89</a></p>
-        <p>Pour nous rejoindre : Prenez le métro jusqu'à la station Oberkampf, puis marchez 5 minutes jusqu'à notre agence.</p>
+        <div>
+          <h3>Comment nous joindre</h3>
+          <p>📍 122 Rue Amelot, 75011 Paris</p>
+          <p>📞 <a href="tel:+33123456789">+33 1 23 45 67 89</a></p>
+          <p>📧 <a href="mailto:mail@nouveau-locationauto.fr">mail@nouveau-locationauto.fr</a></p>
+          <p>🕐 Lundi - Vendredi: 9h - 18h</p>
+        </div>
       </div>
     </div>
   </section>
-  
+
   <!-- FOOTER (PFLICHT - von unten kopieren) -->
   <footer class="nm-footer">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <h3>Nouveau Mobilité</h3>
-        <p style="opacity: 0.8; font-size: 0.9rem; max-width: 250px;">L'élégance du mouvement. Une expérience de location de voiture redéfinie pour le conducteur moderne.</p>
+    <div class="container">
+      <div class="footer-content">
+        <h2 class="footer-logo">Nouveau Mobilité</h2>
+        <nav class="footer-nav">
+          <a href="impressum.html">Mentions Légales</a>
+          <a href="kontakt.html">Contact</a>
+          <a href="#">Confidentialité</a>
+        </nav>
+        <p class="copyright">© 2023 Nouveau Mobilité. Tous droits réservés.</p>
       </div>
-      <div class="footer-col">
-        <h4>Navigation</h4>
-        <ul class="footer-links">
-          <li><a href="index.html">Accueil</a></li>
-          <li><a href="leistungen.html">Notre Flotte</a></li>
-          <li><a href="ueber-uns.html">Services</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Légal</h4>
-        <ul class="footer-links">
-          <li><a href="impressum.html">Mentions Légales</a></li>
-          <li><a href="#">Confidentialité</a></li>
-          <li><a href="#">CGV</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <ul class="footer-links">
-          <li><a href="mailto:info@nouveaumobilite.fr">info@nouveaumobilite.fr</a></li>
-          <li><a href="tel:+33123456789">+33 1 23 45 67 89</a></li>
-          <li style="margin-top: 1rem;">
-            <!-- Social Icons SVG -->
-            <svg width="24" height="24" fill="#fefae0" viewBox="0 0 24 24" style="margin-right: 10px; cursor: pointer;"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
-            <svg width="24" height="24" fill="#fefae0" viewBox="0 0 24 24" style="cursor: pointer;"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      &copy; 2023 Nouveau Mobilité. Tous droits réservés.
     </div>
   </footer>
 </body>
